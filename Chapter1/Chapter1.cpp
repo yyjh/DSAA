@@ -14,8 +14,54 @@ class currency
 {
 public:
 	currency(signType theSign = plus,
-		unsigned long theDollars = 0,);
+			unsigned long theDollars = 0,
+			unsigned int theCents = 0);
+	~currency() {};
+
+	void setValue(signType, unsigned long, unsigned int);
+	void setValue(double);
+	signType getSign() const { return sign; };	// 常量函数不改变调用对象的值
+	unsigned long getDollars() const { return dollars; }
+	unsigned long getCents() const { return cents; }
+	currency add(const currency&) const;
+	currency& increment(const currency&);
+	void output() const;
+
+private:
+	signType sign;				// 对象符号
+	unsigned long dollars;		// 美元数量
+	unsigned int cents;			// 美分数量
+
 };
+
+currency::currency(signType theSign, unsigned long theDollars, unsigned int theCents)
+{
+	setValue(theSign, theDollars, theCents);
+}
+void currency::setValue(signType theSign, unsigned long theDollars, unsigned int theCents)
+{
+	if (theCents > 99)
+		throw "illegalParameterValue Cents shuould be < 100";
+
+	sign = theSign;
+	dollars = theDollars;
+	cents = theCents;
+}
+
+void currency::setValue(double theAmount)
+{
+	if (theAmount < 0)
+	{
+		sign = minus;
+		theAmount = -theAmount;
+	}
+	else
+	{
+		sign = plus;
+	}
+	dollars = (unsigned long)theAmount;
+	cents = (unsigned int)((theAmount + 0.001 - dollars) * 100);
+}
 int main()
 {
     std::cout << "Hello World!\n";
