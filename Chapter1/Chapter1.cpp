@@ -2,68 +2,42 @@
 //
 
 #include <iostream>
+#include "currency.h"
 
-// 程序1-13
-enum signType 
+std::ostream& operator<<(std::ostream& out, const currency& x)
 {
-	plus,
-	minus
-};
-
-class currency
-{
-public:
-	currency(signType theSign = plus,
-			unsigned long theDollars = 0,
-			unsigned int theCents = 0);
-	~currency() {};
-
-	void setValue(signType, unsigned long, unsigned int);
-	void setValue(double);
-	signType getSign() const { return sign; };	// 常量函数不改变调用对象的值
-	unsigned long getDollars() const { return dollars; }
-	unsigned long getCents() const { return cents; }
-	currency add(const currency&) const;
-	currency& increment(const currency&);
-	void output() const;
-
-private:
-	signType sign;				// 对象符号
-	unsigned long dollars;		// 美元数量
-	unsigned int cents;			// 美分数量
-
-};
-
-currency::currency(signType theSign, unsigned long theDollars, unsigned int theCents)
-{
-	setValue(theSign, theDollars, theCents);
-}
-void currency::setValue(signType theSign, unsigned long theDollars, unsigned int theCents)
-{
-	if (theCents > 99)
-		throw "illegalParameterValue Cents shuould be < 100";
-
-	sign = theSign;
-	dollars = theDollars;
-	cents = theCents;
+	x.output(out);
+	return out;
 }
 
-void currency::setValue(double theAmount)
+// test 1-18
+void test_currency()
 {
-	if (theAmount < 0)
-	{
-		sign = minus;
-		theAmount = -theAmount;
+	currency g, h(plus, 1, 1), i, j;
+	g.setValue(plus, 1, 1);
+	i.setValue(-1.01);
+
+	j = h + g;
+	std::cout << h << " + " << g << "=" << j << std::endl;;
+
+	j = (i += g) + h;
+
+
+	try
+	{ 
+		i.setValue(plus, 3, 152);
 	}
-	else
+	catch(const char* e)
 	{
-		sign = plus;
+		std::cout << e << std::endl;
 	}
-	dollars = (unsigned long)theAmount;
-	cents = (unsigned int)((theAmount + 0.001 - dollars) * 100);
+
+	return;
 }
+
 int main()
 {
+	test_currency();
     std::cout << "Hello World!\n";
 }
 
