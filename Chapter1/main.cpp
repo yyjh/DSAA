@@ -6,10 +6,10 @@ void test_chapter();
 
 int main()
 {
-	// ***********Chapter
-	test_chapter();
+	// Chapter
+	//test_chapter();
 
-	// ***********excise
+	// excise
 	test_excise();
 
 	return 0;

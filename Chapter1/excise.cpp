@@ -148,31 +148,36 @@ void test1_12()
 
 // 1.13
 template<typename T>
-void changeLength1D(T a[], int oldLength, T b[], int newLength)
+void changeLength1D(T* &a, int oldLength, int newLength)
 {
-	b = new T[newLength];
-	int length = newLength < oldLength ? newLength : oldLength;
+	if (newLength < 0)
+	{
+		return;
+	}
+	T* b = new T[newLength];
+	int length = oldLength < newLength ? oldLength : newLength;
 	for (int i = 0; i < length; ++i)
 	{
-		a[i] = b[i];
+		b[i] = a[i];
 	}
-
+	delete [] a;
+	a = b;
 }
 void test_1_13()
 {
-	int a[5] = { 1, 1, 1, 1, 1 };
-	int b[3] = { 2, 2, 2 };
-	changeLength1D(a, 5, b, 3);
+	int* a = new int[5];// delete只能删除new出的对象
+	
+	changeLength1D(a, 5, 3);
 }
 
 void test_excise()
 {
-	abc(1, 2, 3);
+	/*abc(1, 2, 3);
 
 	Test1_2();
 	Test1_3();
 	Test1_4();
-	Test1_5();
+	Test1_5();*/
 	//test1_12();
 	test_1_13();
 }
