@@ -1,5 +1,5 @@
-#include "currency.h"
 #include <iostream>
+#include "currency.h"
 
 currency::currency(signType theSign, unsigned long theDollars, unsigned int theCents)
 {

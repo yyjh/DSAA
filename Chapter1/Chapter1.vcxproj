@@ -23,7 +23,7 @@
     <ProjectGuid>{135CDE69-0BA5-4D09-A5AA-3F03EEC4FA9B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Chapter1</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -151,8 +151,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Chapter1.cpp" />
+    <ClCompile Include="chapter.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="currency.cpp" />
+    <ClCompile Include="excise.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="currency.h" />

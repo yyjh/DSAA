@@ -1,44 +1,18 @@
 ﻿// Chapter1.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
-#include <iostream>
-#include "currency.h"
-
-std::ostream& operator<<(std::ostream& out, const currency& x)
-{
-	x.output(out);
-	return out;
-}
-
-// test 1-18
-void test_currency()
-{
-	currency g, h(plus, 1, 1), i, j;
-	g.setValue(plus, 1, 1);
-	i.setValue(-1.01);
-
-	j = h + g;
-	std::cout << h << " + " << g << "=" << j << std::endl;;
-
-	j = (i += g) + h;
-
-
-	try
-	{ 
-		i.setValue(plus, 3, 152);
-	}
-	catch(const char* e)
-	{
-		std::cout << e << std::endl;
-	}
-
-	return;
-}
+void test_excise();
+void test_chapter();
 
 int main()
 {
-	test_currency();
-    std::cout << "Hello World!\n";
+	// ***********Chapter
+	test_chapter();
+
+	// ***********excise
+	test_excise();
+
+	return 0;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
