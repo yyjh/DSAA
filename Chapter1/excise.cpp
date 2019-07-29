@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <vcruntime_exception.h>
+#include "illegalParameterValue.h"
 
 template<typename T>
 T abc(T a, T b, T c)
@@ -84,7 +85,7 @@ void Test1_5()
 int ex(int a, int b, int c)
 {
 	if (a <= 0 || b <= 0 || c <= 0)
-		throw "uhi io";
+		throw illegalParameterValue("uhi io");
 
 	return a + b * c;
 }
@@ -93,7 +94,7 @@ void test1_10()
 	float* x;
 	try
 	{
-		std::cout << ex(1, 1, 2);
+		std::cout << ex(0, 1, 2);
 		x = new float[99999999];
 		delete[]x;
 	}
@@ -111,6 +112,11 @@ void test1_10()
 	{
 		std::cerr << "out of memory" << std::endl;
 		exit(1);
+	}
+	catch (illegalParameterValue e)
+	{
+		e.outputMessage();
+		return;
 	}
 
 }
@@ -172,23 +178,13 @@ void test_1_13()
 
 void test_excise()
 {
-	/*abc(1, 2, 3);
+	//abc(1, 2, 3);
 
-	Test1_2();
-	Test1_3();
-	Test1_4();
-	Test1_5();*/
+	//Test1_2();
+	//Test1_3();
+	//Test1_4();
+	//Test1_5();
+	test1_10();
 	//test1_12();
-	test_1_13();
+	//test_1_13();
 }
-
-// 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
-// 调试程序: F5 或调试 >“开始调试”菜单
-
-// 入门提示: 
-//   1. 使用解决方案资源管理器窗口添加/管理文件
-//   2. 使用团队资源管理器窗口连接到源代码管理
-//   3. 使用输出窗口查看生成输出和其他消息
-//   4. 使用错误列表窗口查看错误
-//   5. 转到“项目”>“添加新项”以创建新的代码文件，或转到“项目”>“添加现有项”以将现有代码文件添加到项目
-//   6. 将来，若要再次打开此项目，请转到“文件”>“打开”>“项目”并选择 .sln 文件

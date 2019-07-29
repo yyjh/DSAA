@@ -152,12 +152,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="chapter.cpp" />
+    <ClCompile Include="illegalParameterValue.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="currency.cpp" />
     <ClCompile Include="excise.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="currency.h" />
+    <ClInclude Include="illegalParameterValue.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
