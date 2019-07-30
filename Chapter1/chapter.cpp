@@ -1,5 +1,7 @@
 #include <iostream>
 #include "currency.h"
+#include <iterator>
+using namespace std;
 
 // 程序1-10 为二维数组分配空间
 template<typename T>
@@ -42,8 +44,8 @@ std::ostream& operator<<(std::ostream& out, const currency& x)
 
 void test_currency()
 {
-	currency g, h(plus, 1, 1), i, j;
-	g.setValue(plus, 1, 1);
+	currency g, h(signType::plus, 1, 1), i, j;
+	g.setValue(signType::plus, 1, 1);
 	i.setValue(-1.01);
 
 	j = h + g;
@@ -54,7 +56,7 @@ void test_currency()
 
 	try
 	{
-		i.setValue(plus, 3, 152);
+		i.setValue(signType::plus, 3, 152);
 	}
 	catch (const char* e)
 	{
@@ -64,15 +66,42 @@ void test_currency()
 	return;
 }
 
+// 程序1-32
+template< typename T>
+void permutation(T list[], int k, int m)
+{
+	if (k == m)
+	{
+		copy(list, list + m + 1, ostream_iterator<T>(cout, ""));
+		cout << endl;
+	}
+	else
+	{
+		for (int i = k; i <= m; ++i)
+		{
+			swap(list[k], list[i]);
+			permutation(list, k + 1, m);
+			swap(list[k], list[i]);
+		}
+	}
+}
+void test_permutations()
+{
+	char a[4] = { 'a', 'b', 'c', 'd' };
+	permutation(a, 0, 3);
+}
+
 void test_chapter()
 {
-	int row = 0;
+	/*int row = 0;
 	int col = 0;
 	std::cout << "Input:" << '\n';
 	std::cin >> row >> col;
 	int** x;
 	make2dArray(x, row, col);
-	delete2dArray(x, row);
+	delete2dArray(x, row);*/
 
-	test_currency();
+	//test_currency();
+
+	test_permutations();
 }
