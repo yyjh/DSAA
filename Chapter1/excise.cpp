@@ -4,6 +4,8 @@
 #include <vcruntime_exception.h>
 #include "illegalParameterValue.h"
 
+using namespace std;
+
 template<typename T>
 T abc(T a, T b, T c)
 {
@@ -176,6 +178,58 @@ void test_1_13()
 	changeLength1D(a, 5, 3);
 }
 
+// 1-20
+int Fibonacci(const int& n)
+{
+	if (n <= 1)
+	{
+		return n;
+	}
+	else
+	{
+		return Fibonacci(n - 1) + Fibonacci(n - 2);
+	}
+}
+void test1_20()
+{
+	for (int i = 0; i < 10; ++i)
+	{
+		int fn = Fibonacci(i);
+		cout << fn << '\n';
+	}
+	
+}
+
+// 1-21
+int f1_21(const int& n)
+{
+	if (n % 2 == 0)
+	{
+		return n / 2;
+	}
+	else
+	{
+		return (3 * n + 1) / 2;
+	}
+}
+
+int f1_21_re(const int& n)
+{
+	if (n % 2 == 0)
+	{
+		return n / 2;
+	}
+	else
+	{
+		return f1_21_re(n * 3 + 1);
+	}
+}
+
+void test_f1_21()
+{
+	cout << f1_21(7) << '\n' << f1_21_re(7) << '\n';
+}
+
 void test_excise()
 {
 	//abc(1, 2, 3);
@@ -184,7 +238,9 @@ void test_excise()
 	//Test1_3();
 	//Test1_4();
 	//Test1_5();
-	test1_10();
+	//test1_10();
 	//test1_12();
 	//test_1_13();
+	//test1_20();
+	test_f1_21();
 }
