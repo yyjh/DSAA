@@ -1,3 +1,5 @@
+// Êé¼®Ê¾Àı´úÂë
+
 #include <iostream>
 #include "currency.h"
 #include <iterator>

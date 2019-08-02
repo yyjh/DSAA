@@ -152,7 +152,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="chapter.cpp" />
-    <ClCompile Include="illegalParameterValue.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="currency.cpp" />
     <ClCompile Include="excise.cpp" />
