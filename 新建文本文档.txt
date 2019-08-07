@@ -1,0 +1,6 @@
+Function StrSum(r As String) As Double
+    arr = Split(r, "ги")
+    For i = 1 To UBound(arr)
+        StrSum = StrSum + Val(arr(i))
+    Next
+End Function
