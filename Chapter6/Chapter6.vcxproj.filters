@@ -21,10 +21,7 @@
     <ClInclude Include="targetver.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="arrayList.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="linearList.h">
+    <ClInclude Include="chain.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -32,10 +29,7 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Chapter5.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="Chapter6.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
