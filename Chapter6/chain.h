@@ -1,4 +1,7 @@
 #pragma once
+#include <iostream>
+using namespace std;
+
 template <typename T>
 struct chainNode
 {
@@ -28,11 +31,43 @@ public:
 
 	bool empty() const { return listSize == 0; }
 	int size() const { return listSize; };
-	T& get(int theIndex);
+	T& get(int theIndex) const;
 	int indexOf(const T& theElement) const;
 	void erase(int gtheIdnex);
 	void insert(int theIndex, const T& theElement);
 	void output(ostream& out) const;
+	iterator begin() { return iterator(firstNode); }
+	iterator end() { return iterator(nullptr); }
+public:
+	class
+	{
+	public:
+		iterator(chainNode<T>* theNode = nullptr) { node = theNode; }
+		T& operator*() const { return node->element; }
+		T* operator->() const { return &node->element; }
+		iterator& operator++()	// Ç°¼Ó
+		{
+			node = node->next;
+			return &node->element;
+		}
+		iterator operator++(int)
+		{
+			iterator old = *this;
+			node = node->next;
+			return old;
+		}
+
+		bool operator!=(const iterator right) const
+		{
+			return node != right.node;
+		}
+		bool operator==(const iterator right) const
+		{
+			return node == right.node;
+		}
+	private:
+		chainNode<T>* node;
+	};	
 
 protected:
 	void checkIndex(int theIndex) const;
@@ -112,6 +147,82 @@ int chain<T>::indexOf(const T& theElement) const
 	{
 		return index;
 	}
+}
+
+template<typename T>
+void chain<T>::erase(int theIndex)
+{
+	checkIndex(theIndex);
+	chainNode<T*> deleteNode;
+	if (theIndex == 0)
+	{
+		deleteNode = firstNode;
+		firstNode = firstNode->element;
+	}
+	else
+	{
+		chainNode<T>* p = firstNode;
+		for (int i = 0; i < theIndex - 1; ++i)
+		{
+			p = p->next;
+		}
+		deleteNode = p->next;
+		p->next = p->next->next;
+	}
+	--listSize;
+	delete deleteNode;
+}
+
+template<typename T>
+void chain<T>::insert(int theIndex, const T& theElement)
+{
+	if (theIndex < 0 || theIndex > listSize)
+	{
+		return;
+	}
+	if (theIndex == 0)
+	{
+		firstNode = new chainNode<T>(theElement, firstNode);
+	}
+	else
+	{
+		chainNode<T>* p = firstNode;
+		for (int i = 0; i < theIndex - 1; ++i)
+		{
+			p = p->next;
+		}
+		p->next = new chainNode<T>(theElement, p->next);
+	}
+	++listSize;
+}
+
+template<typename T>
+void chain<T>::output(ostream& out) const
+{
+	for (chainNode<T>* currentNode = firstNode;
+		currentNode != nullptr;
+		currentNode = currentNode->next)
+	{
+		cout << currentNode->element << " ";
+	}
+}
+
+template<typename T>
+void chain<T>::checkIndex(int theIndex) const
+{
+	if (theIndex < 0 || theIndex >= listSize)
+	{
+		ostringstream s;
+		s << "index = " << theIndex << "size =" << listSize;
+		throw illegalParameterValue(s.str().c_str());
+	}
+}
+
+template<typename T>
+ostream& operator<<(ostream& out, const chain<T>& x)
+{
+	x.output(out);
+	return out;
 }
 
 
