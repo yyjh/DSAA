@@ -30,6 +30,29 @@ void selectionSort(T a[], int n)
 		swap(a[i - 1], a[nMax]);
 	}
 }
+
+template<typename T>
+void selectionSort_Stop(T a[], int n)
+{
+	for (int i = n; !sorted && i > 1; --i)
+	{
+		int indexMax = 0;
+		bool sorted = true;
+		for (int j = 1; j < i; ++j)
+		{
+			if (a[indexMax] <= a[j])
+			{
+				indexMax = j;
+			}
+			else
+			{
+				sorted = false;
+			}
+		}
+		swap(a[indexMax], a[n - 1]);
+	}
+}
+
 void test_selectionSort()
 {
 	int a[5] = { 5, 2, 6, 3, 7 };
@@ -56,6 +79,28 @@ void Bubble(T a[], int n)
 	}
 }
 
+// 及时终止的冒泡排序
+template<typename T>
+void Bubble_Stop(T a[], int n)
+{
+	for (int i = n; i > 0; --i)
+	{
+		bool swapped = false;
+		for (int j = 0; j < i - 1; ++j)
+		{
+			if (a[j] > a[j + 1])
+			{
+				swap(a[j], a[j + 1]);
+				swapped = true;
+			}
+		}
+		if (!swapped)
+		{
+			break;
+		}		
+	}
+}
+
 void test_bubble()
 {
 	int a[5] = { 5, 2, 6, 3, 7 };
@@ -63,6 +108,22 @@ void test_bubble()
 	for (int i = 0; i < 5; ++i)
 	{
 		cout << a[i] << '\n';
+	}
+}
+
+// 2-15 插入排序(从小到大)
+template<typename T>
+void insertionSort(T a[], int n)
+{
+	for (int i = 1; i < n; ++i)
+	{
+		T t = a[i];
+		int j;
+		for (j = i - 1; j >= 0 && t < a[j]; --j)
+		{
+			a[j + 1] = a[j];
+		}
+		a[j + 1] = t;
 	}
 }
 
