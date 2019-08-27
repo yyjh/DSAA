@@ -38,6 +38,7 @@ public:
 	void output(ostream& out) const;
 	iterator begin() { return iterator(firstNode); }
 	iterator end() { return iterator(nullptr); }
+	void setSize(int theSize);
 public:
 	class
 	{
@@ -69,7 +70,7 @@ public:
 		chainNode<T>* node;
 	};	
 
-protected:
+private:
 	void checkIndex(int theIndex) const;
 	chainNode<T>* firstNode;
 	int listSize;
@@ -215,6 +216,14 @@ void chain<T>::checkIndex(int theIndex) const
 		ostringstream s;
 		s << "index = " << theIndex << "size =" << listSize;
 		throw illegalParameterValue(s.str().c_str());
+	}
+}
+
+template<typename T>
+void chain<T>::setSize(int theSize)
+{
+	if ()
+	{
 	}
 }
 
