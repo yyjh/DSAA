@@ -26,7 +26,6 @@ class Boy;
 
 class Girl
 {
-	std::shared_ptr<Boy> boy_friend;
 public:
 	explicit Girl() : boy_friend(nullptr) {};
 	auto set(std::shared_ptr<Boy> &boy)
@@ -37,11 +36,12 @@ public:
 	{
 		std::cout << "girl destruct" << std::endl;
 	}
+
+	std::shared_ptr<Boy> boy_friend;
 };
 
 class Boy
 {
-	std::weak_ptr<Girl> girl_friend;
 public:
 	explicit Boy() : girl_friend(std::shared_ptr<Girl>(nullptr)) {};
 	auto set(std::shared_ptr<Girl> &girl)
@@ -52,6 +52,9 @@ public:
 	{
 		std::cout << "boy destruct" << std::endl;
 	}
+
+	std::weak_ptr<Girl> girl_friend;
+	std::shared_ptr<Girl> girl_friend2;
 };
 
 void test_ptr()
@@ -72,5 +75,8 @@ void test_ptr()
 	auto girl = std::make_shared<Girl>();
 	auto boy = std::make_shared<Boy>();
 	girl->set(boy);
-	boy->set(girl);	
+	boy->set(girl);
+
+	// ÎÞ·¨ÊÍ·Å
+	boy->girl_friend2 = boy->girl_friend.lock();
 }
